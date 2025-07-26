@@ -1,0 +1,28 @@
+package springlesson;
+
+import jakarta.validation.constraints.NotNull;
+import springlesson.User.User;
+
+public class LoginVm extends User {
+@NotNull
+    private String login;
+
+@NotNull
+private String password;
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}
