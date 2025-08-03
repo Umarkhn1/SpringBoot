@@ -1,0 +1,33 @@
+server:
+  port: 8080
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 594694563007-96o5a5ok3ui6qqkhne1bjjl8gbcb3pn8.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - password
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: playbestgames11@gmail.com
+    password: jivn cpuq frxp fiuj
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/oauth
+    username: oauth
+    password: 123
