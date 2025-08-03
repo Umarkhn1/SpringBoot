@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: Ov23liskbbfRJJVRzOO4
+            client-secret: 677cfaccd2bedd8c4d2af926a051aa5033454751
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/oauth
+    username: oauth
+    password: 123
