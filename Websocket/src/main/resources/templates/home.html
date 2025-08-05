@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 id="date"></h1>
+
+</body>
+</html>
+
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+
+<script>
+    var socket = new SockJS("/websocket-connection");
+    stompClient = Stomp.over(socket);
+    stompClient.connect({},function (frame){
+    stompClient.subscribe("/topic/date",function (payload){
+        // console.log(payload)
+    document.getElementById("date").innerText = payload.body
+
+    })
+    })
+</script>

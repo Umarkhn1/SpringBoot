@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2 id="type" ></h2>
+</body>
+</html>
+<textarea cols="10" style="width: 300px" onkeypress="typingMessage()" onkeyup="stopTyping()"></textarea>
+</body>
+</html>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+
+<script>
+    var socket = new SockJS("/websocket-connection");
+    stompClient = Stomp.over(socket);
+    stompClient.connect({},function (frame){
+        stompClient.subscribe("/topic/type",function (payload){
+            // console.log(payload)
+            document.getElementById("type").innerText = payload.body
+        })
+        stompClient.subscribe("/topic/online",function (payload){
+        setTimeout(function (){
+            document.getElementById("type").innerText = payload.body
+        },1000)
+        })
+    })
+    function typingMessage(){
+            stompClient.send("/app/type",{})
+    }
+    function stopTyping(){
+        // setTimeout(function () {
+        //     document.getElementById("type").innerText = "online"
+        // },1000)
+        stompClient.send("/app/online",{},"online")
+
+    }
+    document.querySelector("textarea").addEventListener("keydown", function(e){
+        if (e.key === "Enter") {
+            e.preventDefault();
+            let text = this.value.trim();
+            if (text !== "") {
+                stompClient.send("/app/type", {}, text);
+                this.value = "";
+            }
+        }
+    });
+
+</script>
